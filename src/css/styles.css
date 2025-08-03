@@ -1,152 +1,204 @@
 /* public/css/styles.css */
+
+/* Fuentes importadas desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;700&display=swap');
+
+/* Variables de color basadas en la plantilla */
 :root {
-    --coffee-light: #d9c2a9;
-    --coffee-medium: #6b4e31;
-    --coffee-dark: #4a2c2a;
+    --bg-color: #f5f5f5;
+    --text-color: #333333;
+    --primary-color: #6f4e37;
+    --secondary-color: #4e3b31;
+    --accent-color: #8ac237;
+    --highlight-color: #d4a373;
 }
 
+/* Estilos generales del body */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5e8d2;
-    color: var(--coffee-dark);
-    line-height: 1.6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
+    padding: 0;
+    background-image: url('../assets/images/fondoLogin.png');
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
 }
 
+/* Contenedor principal */
 .container {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1rem;
+    width: 100%; /* Basado en el artboard de 1440px */
+}
+
+/* Contenedor de autenticación */
+#auth-container {
     width: 100%;
+    max-width: 400px; /* Máximo ancho del formulario según Figma */
+    margin-top: 0; /* Ajustado a mt-0 */
 }
 
-.hidden {
-    display: none !important;
+/* Formularios de login y registro */
+.bg-coffee-light {
+    background-color: #ffffff; /* Fondo blanco para el formulario */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 24px; /* Ajustado a p-6 de Tailwind */
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
+  backdrop-filter: blur(10px); /* Aplica el desenfoque al contenido del formulario */
+  z-index: 1; /* Asegura que esté encima de la capa de desenfoque */
 }
 
-/* Estilos para los formularios */
-#loginForm, #registerForm {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 1.5rem;
-    background-color: var(--coffee-light);
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.text-coffee-dark {
+    color: var(--primary-color); /* #6f4e37 */
+    font-weight: 600;
 }
 
-#loginForm h2, #registerForm h2 {
+.text-2xl {
+    font-size: 32px; /* H1 según Figma */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.mb-4 {
+    margin-bottom: 16px; /* Ajustado a mb-4 de Tailwind */
+}
+
+h2 {
     text-align: center;
-    color: var(--coffee-dark);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 16px;
 }
 
-#loginForm input, #registerForm input {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.75rem;
-    border: 1px solid var(--coffee-dark);
-    border-radius: 0.25rem;
-    background-color: #fff;
+/* Campos de entrada */
+.border {
+    border: 2px solid var(--highlight-color); /* Bordes #d4a373 */
+    border-radius: 4px;
 }
 
-#loginForm button, #registerForm button {
+.p-2 {
+    padding: 8px; /* Ajustado a p-2 de Tailwind */
+}
+
+.mb-3 {
+    margin-bottom: 12px; /* Ajustado a mb-3 de Tailwind */
+}
+
+.w-full {
     width: 100%;
-    padding: 0.75rem;
-    background-color: var(--coffee-medium);
-    color: #fff;
-    border: none;
-    border-radius: 0.25rem;
-    font-size: 1rem;
-    cursor: pointer;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color); /* #6f4e37 al enfocar */
+}
+
+/* Botón */
+.bg-coffee-medium {
+    background-color: var(--primary-color); /* #6f4e37 */
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.hover\:bg-coffee-dark:hover {
+    background-color: var(--secondary-color); /* #4e3b31 al pasar el mouse */
+}
+
+.transition {
     transition: background-color 0.3s ease;
 }
 
-#loginForm button:hover, #registerForm button:hover {
-    background-color: var(--coffee-dark);
+/* Enlaces */
+.text-coffee-dark {
+    color: var(--primary-color);
 }
 
-#login-message, #register-message {
-    margin-top: 0.75rem;
+.underline {
+    text-decoration: underline;
+}
+
+.hover\:text-gray-200:hover {
+    color: #e5e7eb; /* Ajuste para el popup */
+}
+
+/* Mensajes */
+#login-message,
+#register-message {
+    min-height: 1em;
+}
+
+/* Sección de variedades (oculta inicialmente) */
+#variedades-section {
+    margin-top: 40px; /* Ajustado a mt-10 de Tailwind */
+}
+
+.text-center {
     text-align: center;
 }
 
-/* Estilos para las tarjetas de variedades */
 #variedades-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(1, 1fr);
 }
 
-#variedades-list .card {
-    max-width: 100%;
-    margin: 0;
+@media (min-width: 640px) {
+    #variedades-list {
+        grid-template-columns: repeat(2, 1fr); /* sm:grid-cols-2 */
+    }
+}
+
+@media (min-width: 768px) {
+    #variedades-list {
+        grid-template-columns: repeat(4, 1fr); /* md:grid-cols-4 */
+    }
+}
+
+.gap-4 {
+    gap: 16px; /* Ajustado a gap-4 de Tailwind */
+}
+
+/* Botón de cerrar sesión */
+#logout {
+    display: none; /* Oculto inicialmente */
+    margin-top: 16px; /* Ajustado a mt-4 de Tailwind */
+}
+
+/* Popup */
+#popup {
+    display: none;
+    position: fixed;
+    top: 16px; /* Ajustado a top-4 de Tailwind */
+    right: 16px; /* Ajustado a right-4 de Tailwind */
+    background-color: var(--secondary-color); /* #4e3b31 */
+    color: #ffffff;
+    padding: 16px; /* Ajustado a p-4 de Tailwind */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#close-popup {
     border: none;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: none;
+    font-size: 18px;
+    cursor: pointer;
 }
 
-#variedades-list .card img {
-    height: 150px;
-    object-fit: cover;
-    border-bottom: 2px solid var(--coffee-dark);
-}
+/* Responsividad */
+@media (max-width: 480px) {
+    #auth-container {
+        max-width: 90%; /* Formulario al 90% del ancho en móvil */
+    }
 
-#variedades-list .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
+    .bg-coffee-light {
+        padding: 15px; /* Ajuste para móvil */
+    }
 
-#variedades-list .card .p-4 {
-    padding: 0.75rem;
-    background-color: #f8f1e9;
-    height: 100%;
-}
-
-#variedades-list .card h3 {
-    font-size: 1.1rem;
-    color: var(--coffee-dark);
-    margin-bottom: 0.5rem;
-}
-
-#variedades-list .card p {
-    font-size: 0.85rem;
-    margin: 0.25rem 0;
-    color: var(--coffee-medium);
-}
-
-#variedades-list .card p strong {
-    color: var(--coffee-dark);
-}
-
-/* Estilos para la sección de variedades */
-#variedades-section {
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    margin: 1rem auto;
-    max-width: 1200px;
-}
-
-#variedades-section h2 {
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-/* Estilos para mensajes */
-.list-group-item.text-warning {
-    background-color: #fff3cd;
-    color: #856404;
-}
-
-.list-group-item.text-danger {
-    background-color: #f8d7da;
-    color: #721c24;
+    h2 {
+        font-size: 24px; /* Reducción para móvil */
+    }
 }
 
 /* Responsive adjustments */
@@ -172,32 +224,6 @@ body {
     }
 }
 
-/* Estilos para el popup */
-#popup {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1000;
-    background-color: #4a90e2; /* Azul suave y elegante */
-    color: #fff;
-    padding: 1rem 1.5rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    animation: slideIn 0.3s ease-out;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 300px;
-}
-
-#popup button {
-    border: none;
-    background: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0;
-    line-height: 1;
-}
 
 @keyframes slideIn {
     from {
