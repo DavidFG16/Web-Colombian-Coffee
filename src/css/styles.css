@@ -1,1 +1,210 @@
-/*Css Global*/
+/* public/css/styles.css */
+:root {
+    --coffee-light: #d9c2a9;
+    --coffee-medium: #6b4e31;
+    --coffee-dark: #4a2c2a;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5e8d2;
+    color: var(--coffee-dark);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+    width: 100%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Estilos para los formularios */
+#loginForm, #registerForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: var(--coffee-light);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#loginForm h2, #registerForm h2 {
+    text-align: center;
+    color: var(--coffee-dark);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+#loginForm input, #registerForm input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--coffee-dark);
+    border-radius: 0.25rem;
+    background-color: #fff;
+}
+
+#loginForm button, #registerForm button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--coffee-medium);
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#loginForm button:hover, #registerForm button:hover {
+    background-color: var(--coffee-dark);
+}
+
+#login-message, #register-message {
+    margin-top: 0.75rem;
+    text-align: center;
+}
+
+/* Estilos para las tarjetas de variedades */
+#variedades-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+#variedades-list .card {
+    max-width: 100%;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#variedades-list .card img {
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 2px solid var(--coffee-dark);
+}
+
+#variedades-list .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+#variedades-list .card .p-4 {
+    padding: 0.75rem;
+    background-color: #f8f1e9;
+}
+
+#variedades-list .card h3 {
+    font-size: 1.1rem;
+    color: var(--coffee-dark);
+    margin-bottom: 0.5rem;
+}
+
+#variedades-list .card p {
+    font-size: 0.85rem;
+    margin: 0.25rem 0;
+    color: var(--coffee-medium);
+}
+
+#variedades-list .card p strong {
+    color: var(--coffee-dark);
+}
+
+/* Estilos para la sección de variedades */
+#variedades-section {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+    max-width: 1200px;
+}
+
+#variedades-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Estilos para mensajes */
+.list-group-item.text-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.list-group-item.text-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    #loginForm, #registerForm {
+        max-width: 100%;
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    #variedades-list {
+        grid-template-columns: 1fr;
+    }
+
+    #variedades-list .card img {
+        height: 120px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    #variedades-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Estilos para el popup */
+#popup {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    background-color: #4a90e2; /* Azul suave y elegante */
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 300px;
+}
+
+#popup button {
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
