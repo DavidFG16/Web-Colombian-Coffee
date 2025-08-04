@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginMessage = document.getElementById('login-message');
     const registerMessage = document.getElementById('register-message');
     const variedadesSection = document.getElementById('variedades-section');
+    const mapaSection = document.getElementById('mapa-section');
     const variedadesList = document.getElementById('variedades-list');
     const logoutButton = document.getElementById('logout');
     const showRegister = document.getElementById('showRegister');
@@ -15,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const popup = document.getElementById('popup');
     const popupMessage = document.getElementById('popup-message');
     const closePopup = document.getElementById('close-popup');
+    const navbar = document.getElementById('navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
     let userId = null;
 
     if (!registerMessage) {
@@ -56,14 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('rol', data.rol);
                 await loadVariedades();
                 variedadesSection.classList.remove('hidden');
+                mapaSection.classList.add('hidden');
                 loginForm.classList.add('hidden');
                 registerForm.classList.add('hidden');
                 logoutButton.classList.remove('hidden');
+                navbar.classList.remove('hidden'); // Mostrar navbar al iniciar sesión
                 loginForm.reset();
                 // Mostrar popup de login exitoso
                 popupMessage.textContent = '¡Inicio de sesión exitoso!';
                 popup.classList.remove('hidden');
-                setTimeout(() => popup.classList.add('hidden'), 3000); // Ocultar después de 3 segundos
+                setTimeout(() => popup.classList.add('hidden'), 3000);
             } else {
                 loginMessage.innerHTML = `<div class="alert alert-danger">${data.error || 'Error al iniciar sesión'}</div>`;
             }
@@ -91,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Mostrar popup de registro exitoso
                 popupMessage.textContent = '¡Cuenta creada exitosamente!';
                 popup.classList.remove('hidden');
-                setTimeout(() => popup.classList.add('hidden'), 3000); // Ocultar después de 3 segundos
+                setTimeout(() => popup.classList.add('hidden'), 3000);
             } else {
                 registerMessage.innerHTML = `<div class="alert alert-danger">${data.error || 'Error al registrar'}</div>`;
             }
@@ -156,25 +161,45 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('contrasena');
         userId = null;
         variedadesSection.classList.add('hidden');
+        mapaSection.classList.add('hidden');
         variedadesList.innerHTML = '';
         loginMessage.innerHTML = '<div class="alert alert-info">Sesión cerrada</div>';
         loginForm.classList.remove('hidden');
         registerForm.classList.add('hidden');
         logoutButton.classList.add('hidden');
+        navbar.classList.add('hidden'); // Ocultar navbar al cerrar sesión
+        body.classList.add('background'); // Restaurar fondo al cerrar sesión
     });
 
     // Cargar variedades si ya hay credenciales
     if (localStorage.getItem('correo') && localStorage.getItem('contrasena')) {
         loadVariedades();
-        body.classList.remove('background')
+        body.classList.remove('background');
         variedadesSection.classList.remove('hidden');
+        mapaSection.classList.add('hidden');
         loginForm.classList.add('hidden');
         registerForm.classList.add('hidden');
         logoutButton.classList.remove('hidden');
+        navbar.classList.remove('hidden'); // Mostrar navbar al cargar con credenciales
     }
 
     // Cerrar popup al hacer clic en el botón
     closePopup.addEventListener('click', () => {
         popup.classList.add('hidden');
+    });
+
+    // Navegación entre secciones
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = link.getAttribute('data-section');
+            if (section === 'variedades') {
+                variedadesSection.classList.remove('hidden');
+                mapaSection.classList.add('hidden');
+            } else if (section === 'mapa') {
+                variedadesSection.classList.add('hidden');
+                mapaSection.classList.remove('hidden');
+            }
+        });
     });
 });

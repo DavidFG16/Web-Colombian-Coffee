@@ -12,6 +12,13 @@
 
 <body id="body" class="flex items-center justify-center min-h-screen background">
     <div class="container">
+        <nav id="navbar" class="hidden bg-primary-color text-white p-4">
+            <ul class="flex space-x-6 justify-center">
+                <li><a href="#" class="nav-link" data-section="variedades">Variedades</a></li>
+                <li><a href="#" class="nav-link" data-section="mapa">Mapa</a></li>
+            </ul>
+        </nav>
+
         <div id="auth-container" class="max-w-md mx-auto mt-0">
             <!-- Formulario de Login -->
             <form id="loginForm" class="bg-coffee-light p-6 rounded-lg shadow-lg">
@@ -51,6 +58,11 @@
         <div id="variedades-section" class="hidden mt-10">
             <h2 class="text-2xl font-bold text-coffee-dark text-center mb-4">Variedades de Café</h2>
             <div id="variedades-list" class="list-group grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"></div>
+        </div>
+
+        <div id="mapa-section" class="hidden mt-10">
+            <h2 class="text-2xl font-bold text-coffee-dark text-center mb-4">Mapa</h2>
+            <div id="mapa-container" class="h-64 bg-gray-200">Mapa se agregará aquí</div>
         </div>
 
         <button id="logout" class="hidden btn btn-secondary mt-4">Cerrar Sesión</button>

@@ -19,12 +19,9 @@ body {
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom, #d4a373, #f5f5f5);
-
-    /* display: flex; /
-    / justify-content: center;
-    align-items: center; */
 }
-.background{
+
+.background {
     background-image: 
      linear-gradient(rgba(255, 236, 207, 0.5), rgba(0, 0, 0, 0.5)),
      url('../assets/images/fondoLogin.png');
@@ -34,44 +31,44 @@ body {
 
 /* Contenedor principal */
 .container {
-    width: 100%; /* Basado en el artboard de 1440px */
+    width: 100%;
 }
 
 /* Contenedor de autenticación */
 #auth-container {
     width: 100%;
-    max-width: 400px; /* Máximo ancho del formulario según Figma */
-    margin-top: 0; /* Ajustado a mt-0 */
+    max-width: 400px;
+    margin-top: 0;
 }
 
 /* Formularios de login y registro */
 .bg-coffee-light {
-    background-color: #ffffff; /* Fondo blanco para el formulario */
+    background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    padding: 24px; /* Ajustado a p-6 de Tailwind */
-    background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
-  backdrop-filter: blur(10px); /* Aplica el desenfoque al contenido del formulario */
-  z-index: 1; /* Asegura que esté encima de la capa de desenfoque */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1;
 }
 
 .text-coffee-dark {
-    color: var(--primary-color); /* #6f4e37 */
+    color: var(--primary-color);
     font-weight: 600;
 }
 
 .text-2xl {
-    font-size: 32px; /* H1 según Figma */
+    font-size: 32px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
 }
 
 .mb-4 {
-    margin-bottom: 16px; /* Ajustado a mb-4 de Tailwind */
+    margin-bottom: 16px;
 }
 
 h2 {
@@ -81,16 +78,16 @@ h2 {
 
 /* Campos de entrada */
 .border {
-    border: 2px solid var(--highlight-color); /* Bordes #d4a373 */
+    border: 2px solid var(--highlight-color);
     border-radius: 4px;
 }
 
 .p-2 {
-    padding: 8px; /* Ajustado a p-2 de Tailwind */
+    padding: 8px;
 }
 
 .mb-3 {
-    margin-bottom: 12px; /* Ajustado a mb-3 de Tailwind */
+    margin-bottom: 12px;
 }
 
 .w-full {
@@ -99,12 +96,12 @@ h2 {
 
 input:focus {
     outline: none;
-    border-color: var(--primary-color); /* #6f4e37 al enfocar */
+    border-color: var(--primary-color);
 }
 
 /* Botón */
 .bg-coffee-medium {
-    background-color: var(--primary-color); /* #6f4e37 */
+    background-color: var(--primary-color);
 }
 
 .text-white {
@@ -112,7 +109,7 @@ input:focus {
 }
 
 .hover\:bg-coffee-dark:hover {
-    background-color: var(--secondary-color); /* #4e3b31 al pasar el mouse */
+    background-color: var(--secondary-color);
 }
 
 .transition {
@@ -129,7 +126,7 @@ input:focus {
 }
 
 .hover\:text-gray-200:hover {
-    color: #e5e7eb; /* Ajuste para el popup */
+    color: #e5e7eb;
 }
 
 /* Mensajes */
@@ -140,7 +137,7 @@ input:focus {
 
 /* Sección de variedades (oculta inicialmente) */
 #variedades-section {
-    margin-top: 40px; /* Ajustado a mt-10 de Tailwind */
+    margin-top: 40px;
 }
 
 .text-center {
@@ -154,33 +151,33 @@ input:focus {
 
 @media (min-width: 640px) {
     #variedades-list {
-        grid-template-columns: repeat(2, 1fr); /* sm:grid-cols-2 */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 768px) {
     #variedades-list {
-        grid-template-columns: repeat(4, 1fr); /* md:grid-cols-4 */
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
 .gap-4 {
-    gap: 16px; /* Ajustado a gap-4 de Tailwind */
+    gap: 16px;
 }
 
 /* Botón de cerrar sesión */
-.hidden{
+.hidden {
     display: none !important;
 }
 
 /* Popup */
 #popup {
     position: fixed;
-    top: 16px; /* Ajustado a top-4 de Tailwind */
-    right: 16px; /* Ajustado a right-4 de Tailwind */
-    background-color: var(--secondary-color); /* #4e3b31 */
+    top: 16px;
+    right: 16px;
+    background-color: var(--secondary-color);
     color: #ffffff;
-    padding: 16px; /* Ajustado a p-4 de Tailwind */
+    padding: 16px;
     animation: slideIn 0.3s ease-out;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -196,15 +193,15 @@ input:focus {
 /* Responsividad */
 @media (max-width: 480px) {
     #auth-container {
-        max-width: 90%; /* Formulario al 90% del ancho en móvil */
+        max-width: 90%;
     }
 
     .bg-coffee-light {
-        padding: 15px; /* Ajuste para móvil */
+        padding: 15px;
     }
 
     h2 {
-        font-size: 24px; /* Reducción para móvil */
+        font-size: 24px;
     }
 }
 
@@ -231,6 +228,50 @@ input:focus {
     }
 }
 
+/* Estilos para la navbar */
+#navbar {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+#navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+#navbar a:hover {
+    color: var(--highlight-color);
+    transform: scale(1.1);
+}
+
+/* Sección de mapa */
+#mapa-section {
+    margin-top: 40px;
+}
+
+#mapa-container {
+    height: 400px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+}
 
 @keyframes slideIn {
     from {
