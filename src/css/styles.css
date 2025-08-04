@@ -175,10 +175,17 @@ input:focus {
 /* Popup */
 #popup {
     position: fixed;
+    z-index: 2000;
     top: 16px;
     right: 16px;
     background-color: var(--secondary-color);
-    color: #ffffff;
+    color: #6f4e37;
+    background-color: rgba(200, 96, 23, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
     padding: 16px;
     animation: slideIn 0.3s ease-out;
     border-radius: 8px;
@@ -241,7 +248,7 @@ input:focus {
 
 /* Estilos para la navbar */
 #navbar {
-    position: sticky;
+    position: absolute;
     top: 0;
     z-index: 1000;
     width: 100%;
