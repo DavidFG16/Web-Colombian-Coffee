@@ -1,5 +1,6 @@
 // js/main.js
 import { login, register, fetchVariedades } from './utils/api.js';
+import ".utils/mapa.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.getElementById('body');
