@@ -12,10 +12,18 @@ export async function login(correo, contrasena) {
     return response.json();
 }
 
-export async function register(nombre, correo, contrasena) {
-    const response = await fetch('http://localhost:8080/register/user', {
+export async function register(nombre, correo, contrasena, rol = 'user') {
+    const endpoint = rol === 'admin' ? 'http://localhost:8080/register/admin' : 'http://localhost:8080/register/user';
+    const token = localStorage.getItem('token'); // Obtener token del login
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+    if (token && rol === 'admin') {
+        headers['Authorization'] = `Bearer ${token}`; // Añadir token para admin
+    }
+    const response = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ nombre, correo, contrasena }),
     });
     if (!response.ok) {

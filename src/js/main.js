@@ -5,19 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.getElementById('body');
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
+    const registerAdminForm = document.getElementById('registerAdminForm');
     const loginMessage = document.getElementById('login-message');
     const registerMessage = document.getElementById('register-message');
+    const registerAdminMessage = document.getElementById('register-admin-message');
     const variedadesSection = document.getElementById('variedades-section');
     const mapaSection = document.getElementById('mapa-section');
     const variedadesList = document.getElementById('variedades-list');
     const logoutButton = document.getElementById('logout');
     const showRegister = document.getElementById('showRegister');
     const showLogin = document.getElementById('showLogin');
+    const backToLogin = document.getElementById('backToLogin');
     const popup = document.getElementById('popup');
     const popupMessage = document.getElementById('popup-message');
     const closePopup = document.getElementById('close-popup');
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
+    const registerAdminLink = document.getElementById('register-admin-link');
     let userId = null;
 
     if (!registerMessage) {
@@ -36,6 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
     showLogin.addEventListener('click', (e) => {
         e.preventDefault();
         registerForm.classList.add('hidden');
+        registerAdminForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+    });
+
+    // Volver a login desde registro de admin
+    backToLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        registerAdminForm.classList.add('hidden');
         loginForm.classList.remove('hidden');
     });
 
@@ -56,14 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 userId = data.user_id || null;
                 loginMessage.innerHTML = '';
                 localStorage.setItem('nombre', data.nombre);
-                localStorage.setItem('rol', data.rol);
+                localStorage.setItem('rol', data.rol); // Almacenar el rol del usuario
                 await loadVariedades();
                 variedadesSection.classList.remove('hidden');
                 mapaSection.classList.add('hidden');
                 loginForm.classList.add('hidden');
                 registerForm.classList.add('hidden');
                 logoutButton.classList.remove('hidden');
-                navbar.classList.remove('hidden'); // Mostrar navbar al iniciar sesión
+                navbar.classList.remove('hidden'); // Mostrar navbar
+                if (data.rol === 'admin') {
+                    registerAdminLink.classList.remove('hidden'); // Mostrar "Registrar admin" solo para admin
+                }
                 loginForm.reset();
                 // Mostrar popup de login exitoso
                 popupMessage.textContent = '¡Inicio de sesión exitoso!';
@@ -78,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Register
+    // Register (rol 'user' por defecto)
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const nombre = document.getElementById('register-name').value;
@@ -86,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('register-password').value;
         try {
             console.log('Intentando registrar con:', { nombre, email, password });
-            const data = await register(nombre, email, password);
+            const data = await register(nombre, email, password, 'user'); // Rol 'user' por defecto
             console.log('Respuesta del registro:', data);
             if (data.id) {
                 registerMessage.innerHTML = '';
@@ -103,6 +118,32 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error en register:', error);
             registerMessage.innerHTML = `<div class="alert alert-danger">Error al procesar el registro: ${error.message}</div>`;
+        }
+    });
+
+    // Register Admin (rol 'admin')
+    registerAdminForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nombre = document.getElementById('register-admin-name').value;
+        const email = document.getElementById('register-admin-email').value;
+        const password = document.getElementById('register-admin-password').value;
+        try {
+            console.log('Intentando registrar admin con:', { nombre, email, password });
+            const data = await register(nombre, email, password, 'admin'); // Rol 'admin'
+            console.log('Respuesta del registro admin:', data);
+            if (data.id) {
+                registerAdminMessage.innerHTML = '';
+                registerAdminForm.reset();
+                // Mostrar popup de registro exitoso
+                popupMessage.textContent = '¡Administrador registrado exitosamente!';
+                popup.classList.remove('hidden');
+                setTimeout(() => popup.classList.add('hidden'), 3000);
+            } else {
+                registerAdminMessage.innerHTML = `<div class="alert alert-danger">${data.error || 'Error al registrar administrador'}</div>`;
+            }
+        } catch (error) {
+            console.error('Error en register admin:', error);
+            registerAdminMessage.innerHTML = `<div class="alert alert-danger">Error al procesar el registro: ${error.message}</div>`;
         }
     });
 
@@ -159,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('token');
         localStorage.removeItem('correo');
         localStorage.removeItem('contrasena');
+        localStorage.removeItem('rol'); // Limpiar rol al cerrar sesión
         userId = null;
         variedadesSection.classList.add('hidden');
         mapaSection.classList.add('hidden');
@@ -166,9 +208,11 @@ document.addEventListener('DOMContentLoaded', () => {
         loginMessage.innerHTML = '<div class="alert alert-info">Sesión cerrada</div>';
         loginForm.classList.remove('hidden');
         registerForm.classList.add('hidden');
+        registerAdminForm.classList.add('hidden');
         logoutButton.classList.add('hidden');
-        navbar.classList.add('hidden'); // Ocultar navbar al cerrar sesión
-        body.classList.add('background'); // Restaurar fondo al cerrar sesión
+        navbar.classList.add('hidden');
+        registerAdminLink.classList.add('hidden'); // Ocultar "Registrar admin" al cerrar sesión
+        body.classList.add('background');
     });
 
     // Cargar variedades si ya hay credenciales
@@ -180,7 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.classList.add('hidden');
         registerForm.classList.add('hidden');
         logoutButton.classList.remove('hidden');
-        navbar.classList.remove('hidden'); // Mostrar navbar al cargar con credenciales
+        navbar.classList.remove('hidden');
+        if (localStorage.getItem('rol') === 'admin') {
+            registerAdminLink.classList.remove('hidden'); // Mostrar "Registrar admin" si es admin
+        }
     }
 
     // Cerrar popup al hacer clic en el botón
@@ -196,9 +243,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (section === 'variedades') {
                 variedadesSection.classList.remove('hidden');
                 mapaSection.classList.add('hidden');
+                registerAdminForm.classList.add('hidden');
             } else if (section === 'mapa') {
                 variedadesSection.classList.add('hidden');
                 mapaSection.classList.remove('hidden');
+                registerAdminForm.classList.add('hidden');
+            } else if (section === 'register-admin') {
+                variedadesSection.classList.add('hidden');
+                mapaSection.classList.add('hidden');
+                registerAdminForm.classList.remove('hidden');
             }
         });
     });
