@@ -43,14 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
         registerAdminForm.classList.add('hidden');
         loginForm.classList.remove('hidden');
     });
-
-    // Volver a login desde registro de admin
-    backToLogin.addEventListener('click', (e) => {
-        e.preventDefault();
-        registerAdminForm.classList.add('hidden');
-        loginForm.classList.remove('hidden');
-    });
-
     // Login
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
