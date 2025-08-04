@@ -1,6 +1,5 @@
-// js/main.js
 import { login, register, fetchVariedades } from './utils/api.js';
-import ".utils/mapa.js";
+import { initMap } from './utils/mapa.js'; // Importa initMap
 
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.getElementById('body');
@@ -44,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         registerAdminForm.classList.add('hidden');
         loginForm.classList.remove('hidden');
     });
+
     // Login
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -241,6 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 variedadesSection.classList.add('hidden');
                 mapaSection.classList.remove('hidden');
                 registerAdminForm.classList.add('hidden');
+                initMap(); // Inicializar el mapa cuando se muestra la sección
             } else if (section === 'register-admin') {
                 variedadesSection.classList.add('hidden');
                 mapaSection.classList.add('hidden');
