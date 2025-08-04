@@ -18,10 +18,18 @@ body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('../assets/images/fondoLogin.png');
-    /* display: flex; */
-    /* justify-content: center;
+    background: linear-gradient(to bottom, #d4a373, #f5f5f5);
+
+    /* display: flex; /
+    / justify-content: center;
     align-items: center; */
+}
+.background{
+    background-image: 
+     linear-gradient(rgba(255, 236, 207, 0.5), rgba(0, 0, 0, 0.5)),
+     url('../assets/images/fondoLogin.png');
+     background-repeat: no-repeat;
+     background-size: cover;
 }
 
 /* Contenedor principal */
@@ -161,20 +169,19 @@ input:focus {
 }
 
 /* Botón de cerrar sesión */
-#logout {
-    display: none; /* Oculto inicialmente */
-    margin-top: 16px; /* Ajustado a mt-4 de Tailwind */
+.hidden{
+    display: none !important;
 }
 
 /* Popup */
 #popup {
-    display: none;
     position: fixed;
     top: 16px; /* Ajustado a top-4 de Tailwind */
     right: 16px; /* Ajustado a right-4 de Tailwind */
     background-color: var(--secondary-color); /* #4e3b31 */
     color: #ffffff;
     padding: 16px; /* Ajustado a p-4 de Tailwind */
+    animation: slideIn 0.3s ease-out;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

@@ -2,6 +2,7 @@
 import { login, register, fetchVariedades } from './utils/api.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    const body = document.getElementById('body');
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
     const loginMessage = document.getElementById('login-message');
@@ -165,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar variedades si ya hay credenciales
     if (localStorage.getItem('correo') && localStorage.getItem('contrasena')) {
         loadVariedades();
+        body.classList.remove('background')
         variedadesSection.classList.remove('hidden');
         loginForm.classList.add('hidden');
         registerForm.classList.add('hidden');
