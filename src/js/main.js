@@ -291,54 +291,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mostrar/Ocultar botón de agregar variedad según rol
     if (localStorage.getItem('rol') === 'admin') {
-        document.getElementById('add-variety-button').classList.remove('hidden');
-    }
+    document.getElementById('add-variety-button').classList.remove('hidden');
+}
 
-    // Manejar popup de agregar variedad
-    const addVarietyModal = document.getElementById('add-variety-modal');
-    const openAddVarietyModal = document.getElementById('open-add-variety-modal');
-    const closeAddVarietyModal = document.getElementById('close-add-variety-modal');
-    const addVarietyForm = document.getElementById('add-variety-form');
+// Manejar popup de agregar variedad
+const addVarietyModal = document.getElementById('add-variety-modal');
+const openAddVarietyModal = document.getElementById('open-add-variety-modal');
+const closeAddVarietyModal = document.getElementById('close-add-variety-modal');
+const addVarietyForm = document.getElementById('add-variety-form');
 
-    openAddVarietyModal.addEventListener('click', () => {
-        addVarietyModal.classList.remove('hidden');
-    });
+openAddVarietyModal.addEventListener('click', () => {
+    addVarietyModal.classList.remove('hidden');
+});
 
-    closeAddVarietyModal.addEventListener('click', () => {
-        addVarietyModal.classList.add('hidden');
-        addVarietyForm.reset();
-    });
+closeAddVarietyModal.addEventListener('click', () => {
+    addVarietyModal.classList.add('hidden');
+    addVarietyForm.reset();
+});
 
-    addVarietyForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const nombre_comun = document.getElementById('variety-name').value;
-        const pais_lanzamiento = document.getElementById('variety-origin').value;
-        const imagen = document.getElementById('variety-image').value;
-        const descripcion = document.getElementById('variety-description').value;
+addVarietyForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nombre_comun = document.getElementById('variety-name').value;
+    const nombre_cientifico = document.getElementById('variety-scientific-name').value || 'Coffea canephora';
+    const pais_lanzamiento = document.getElementById('variety-origin').value;
+    const rendimiento_potencial = document.getElementById('variety-yield').value;
+    const tamano_grano = document.getElementById('variety-grain-size').value;
+    const color_punta_hoja = document.getElementById('variety-leaf-color').value;
+    const descripcion_genetica = document.getElementById('variety-genetic-desc').value;
+    const criador = document.getElementById('variety-breeder').value;
+    const descripcion = document.getElementById('variety-description').value;
+    const imagen = document.getElementById('variety-image').value;
 
-        try {
-            const response = await fetch('http://localhost:8080/variedades', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Basic ${btoa(`${localStorage.getItem('correo')}:${localStorage.getItem('contrasena')}`)}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nombre_comun, pais_lanzamiento, imagen, descripcion })
-            });
-            if (response.ok) {
-                addVarietyModal.classList.add('hidden');
-                addVarietyForm.reset();
-                await loadVariedades(); // Asegurar que se recargue correctamente
-                popupMessage.textContent = 'Variedad agregada exitosamente!';
-                popup.classList.remove('hidden');
-                setTimeout(() => popup.classList.add('hidden'), 3000);
-            } else {
-                const errorData = await response.json();
-                alert('Error al agregar: ' + (errorData.error || 'Inténtalo de nuevo'));
-            }
-        } catch (error) {
-            console.error('Error al agregar variedad:', error);
-            alert('Error al agregar la variedad');
+    try {
+        const response = await fetch('http://localhost:8080/variedades', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Basic ${btoa(`${localStorage.getItem('correo')}:${localStorage.getItem('contrasena')}`)}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nombre_comun, nombre_cientifico, pais_lanzamiento, rendimiento_potencial, tamano_grano, color_punta_hoja, descripcion_genetica, criador, descripcion, imagen })
+        });
+        if (response.ok) {
+            addVarietyModal.classList.add('hidden');
+            addVarietyForm.reset();
+            await loadVariedades(); // Asegurar que se recargue correctamente
+            popupMessage.textContent = 'Variedad agregada exitosamente!';
+            popup.classList.remove('hidden');
+            setTimeout(() => popup.classList.add('hidden'), 3000);
+        } else {
+            const errorData = await response.json();
+            alert('Error al agregar: ' + (errorData.error || 'Inténtalo de nuevo'));
         }
-    });
+    } catch (error) {
+        console.error('Error al agregar variedad:', error);
+        alert('Error al agregar la variedad');
+    }
+});
 });
