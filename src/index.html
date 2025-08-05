@@ -8,13 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <script type="module" src="js/utils/mapa.js" defer ></script>
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
+    <script type="module" src="js/utils/mapa.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 
 <body id="body" class="flex items-center justify-center min-h-screen background">
@@ -25,11 +23,9 @@
             <li><a href="#" class="nav-link" data-section="mapa">Mapa</a></li>
             <li id="register-admin-link" class="hidden"><a href="#" class="nav-link" data-section="register-admin">Registrar admin</a></li>
             <li id="logout" class="nav-link"><a href="#" class="nav-link" data-section="mapa">Cerrar Sesión</a></li>
-
         </ul>
     </nav>
     <div class="container">
-
         <div id="auth-container" class="max-w-md mx-auto mt-0">
             <!-- Formulario de Login -->
             <form id="loginForm" class="bg-coffee-light p-6 rounded-lg shadow-lg">
@@ -87,6 +83,9 @@
 
         <div id="variedades-section" class="hidden mt-10">
             <h2 class="text-2xl font-bold text-coffee-dark text-center mb-4">Variedades de Café</h2>
+            <div id="add-variety-button" class="text-center mb-4 hidden">
+                <button id="open-add-variety-modal" class="bg-coffee-medium text-white p-2 rounded hover:bg-coffee-dark transition">Agregar Variedad</button>
+            </div>
             <div id="variedades-list" class="list-group grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"></div>
         </div>
 
@@ -95,7 +94,32 @@
             <div id="map" class=""></div>
         </div>
 
-        
+        <!-- Popup para agregar variedad -->
+        <div id="add-variety-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+            <div class="bg-coffee-light p-6 rounded-lg shadow-lg w-11/12 max-w-md">
+                <h2 class="text-2xl font-bold text-coffee-dark text-center mb-4">Agregar Nueva Variedad</h2>
+                <form id="add-variety-form">
+                    <div class="mb-3">
+                        <label for="variety-name" class="form-label text-coffee-dark">Nombre Común</label>
+                        <input type="text" class="form-control p-2 border rounded w-full" id="variety-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="variety-origin" class="form-label text-coffee-dark">País de Origen</label>
+                        <input type="text" class="form-control p-2 border rounded w-full" id="variety-origin" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="variety-image" class="form-label text-coffee-dark">URL de Imagen</label>
+                        <input type="text" class="form-control p-2 border rounded w-full" id="variety-image" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="variety-description" class="form-label text-coffee-dark">Descripción</label>
+                        <textarea class="form-control p-2 border rounded w-full" id="variety-description" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-coffee-medium text-white p-2 rounded hover:bg-coffee-dark transition">Guardar</button>
+                </form>
+                <button id="close-add-variety-modal" class="mt-4 w-full bg-gray-300 text-black p-2 rounded hover:bg-gray-400 transition">Cerrar</button>
+            </div>
+        </div>
 
         <!-- Popup -->
         <div id="popup" class="fixed top-4 right-4 bg-coffee-medium text-white p-4 rounded-lg shadow-lg hidden" role="alert">

@@ -314,3 +314,44 @@ input:focus {
         opacity: 1;
     }
 }
+
+/* ... (estilos existentes) ... */
+
+/* Estilos para el botón de eliminación */
+.delete-variety {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Estilos para el modal de agregar variedad */
+#add-variety-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+#add-variety-modal .bg-coffee-light {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#close-add-variety-modal:hover {
+    background-color: #d1d5db;
+}
+
+/* Ajuste responsivo para el modal */
+@media (max-width: 480px) {
+    #add-variety-modal .bg-coffee-light {
+        padding: 15px;
+    }
+}
