@@ -35,7 +35,7 @@ async function loadVariedades() {
                                 <p class="text-gray-600"><strong>Genética:</strong> ${variedad.descripcion_genetica || 'No especificado'}</p>
                                 <p class="text-gray-600"><strong>Criador:</strong> ${variedad.criador || 'No especificado'}</p>
                                 <p class="text-gray-700">${variedad.descripcion || 'Sin descripción'}</p>
-                                ${localStorage.getItem('rol') === 'admin' ? `<button class="delete-variety absolute top-2 right-2 bg-red-500 text-white p-1 rounded hover:bg-red-600" data-id="${variedad.id || ''}">X</button>` : ''}
+                                ${localStorage.getItem('rol') === 'admin' ? `<button class="delete-variety absolute top-2 right-2 bg-red-500 text-white p-1 rounded hover:bg-red-600" data-id="${variedad.id || ''}"><img src="./assets/images/delete.png"></button>` : ''}
                             </div>
                         `;
                         variedadesList.appendChild(tarjeta);
@@ -227,6 +227,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    logoutButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        localStorage.removeItem('correo');
+        localStorage.removeItem('contrasena');
+        localStorage.removeItem('rol'); // Limpiar rol al cerrar sesión
+        userId = null;
+        variedadesSection.classList.add('hidden');
+        mapaSection.classList.add('hidden');
+        variedadesList.innerHTML = '';
+        loginMessage.innerHTML = '<div class="alert alert-info">Sesión cerrada</div>';
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+        registerAdminForm.classList.add('hidden');
+        logoutButton.classList.add('hidden');
+        navbar.classList.add('hidden');
+        registerAdminLink.classList.add('hidden'); // Ocultar "Registrar admin" al cerrar sesión
+        body.classList.add('background');
+    });
     // Cargar variedades si ya hay credenciales
     if (localStorage.getItem('correo') && localStorage.getItem('contrasena')) {
         loadVariedades();
