@@ -319,10 +319,9 @@ input:focus {
 /* Estilos para el botón de eliminación */
 .delete-variety {
     position: absolute;
-    top: 8px;
     right: 8px;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     line-height: 20px;
     text-align: center;
     cursor: pointer;
@@ -353,4 +352,55 @@ input:focus {
     #add-variety-modal .bg-coffee-light {
         padding: 15px;
     }
+}
+.grain-size-container {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.grain-icon {
+    width: 20px;
+    height: 30px; /* Altura base para un grano alargado */
+    background-color: #fad0bf; /* Color base opaco */
+    border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%; /* Forma de grano */
+    margin: 0 5px;
+    position: relative;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.grain-active {
+    background-color: #641c00; /* Color destacado (púrpura oscuro, ajustable) */
+    box-shadow: 0 0 5px rgb(94, 31, 1);
+    transform: scale(1.1); /* Pequeño aumento para destacar */
+}
+
+.grain-inactive {
+    opacity: 0.4;
+}
+
+/* Escalas basadas en el tamaño del grano */
+.grain-small.grain-active { transform: scale(0.6); }
+.grain-medium.grain-active { transform: scale(0.8); }
+.grain-large.grain-active { transform: scale(1.0); }
+.grain-extra-large.grain-active { transform: scale(1.2); }
+
+/* Escalas para los granos inactivos, proporcionales al activo */
+.grain-small.grain-inactive { transform: scale(0.6); }
+.grain-medium.grain-inactive { transform: scale(0.8); }
+.grain-large.grain-inactive { transform: scale(1.0); }
+.grain-extra-large.grain-inactive { transform: scale(1.2); }
+
+/* Sombra interna para profundidad */
+.grain-icon::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 80%;
+    height: 80%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+    border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+    z-index: 1;
 }
